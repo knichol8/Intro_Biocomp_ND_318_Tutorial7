@@ -120,21 +120,28 @@ def q2():
     print(b + geom_point()+ coord_cartesian() + theme_bw() + stat + xl + yl + title)
     return
 def q3():
-    #Q3
-    #Pseudocode
-    #import packages
-    
-    #read in .txt file and find size
-    data=pandas.read_csv("data.txt", sep="\t", header=0)
-    data.shape
-    #plan for storing info
-    
-    #for loop starts
-    #if north, add all numbers and divide by length
-    #elif south, add all numbers and divide by length
-    #elif east, add all numbers and divide by length
-    #elif west, add all numbers and divide by length
-    barplot=ggplot(data,aes(x=""))
+#Q3
+#Pseudocode
+#import packages
+import numpy
+import pandas
+from plotnine import *
+#read in .txt file and find size
+data=pandas.read_csv("data.txt", sep="\t", header=0)
+data.shape
+#storing info
+######################################################regions=data["region"]
+observation=data["observations"]
+
+#barplot of means
+data.groupby(['region'])['observation'].mean()
+d=ggplot(observations)+theme_classic()+xlab("regions")+ylab("observation mean")
+d+geom_bar(aes(x="factor(region)"),y='observations', stat="summary", fun_y=numpy.mean)
+
+#Scatterplot
+a=ggplot(data,aes('region', 'observations'))
+scatterplot=ggplot(data,aes(x="region",y="observations"))
+scatterplot+geom_point()+coord_cartesian()
     
     return
 
