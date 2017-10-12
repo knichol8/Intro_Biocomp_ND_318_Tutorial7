@@ -120,27 +120,18 @@ def q2():
     print(b + geom_point()+ coord_cartesian() + theme_bw() + stat + xl + yl + title)
     return
 def q3():
-#Q3
-#Pseudocode
-#import packages
-import numpy
-import pandas
-from plotnine import *
-#read in .txt file and find size
-data=pandas.read_csv("data.txt", sep=',')
-data.shape
-#This code creates a graph of means observations for each region.
-data.observations = data.observations.astype(float)
-d=ggplot(data)+theme_classic()+xlab("regions")+ylab("observation mean")
-d+geom_bar(aes(x="factor(region)"),y=data.observations, stat="summary", fun_y=numpy.mean)
-
-
-#This code creates a scatterplot of observations and uses jitter to make the points
-#     more readable
-a=ggplot(data,aes('region', 'observations'))
-scatterplot=ggplot(data,aes(x="region",y="observations"))
-scatterplot+geom_point()+coord_cartesian()+geom_jitter()
-
+    #read in .txt file
+    data=pandas.read_csv("data.txt", sep=',')
+    #This code creates a graph of means observations for each region.
+    c1=ggplot(data)+theme_classic()+xlab("regions")+ylab("observation mean")
+    x = "factor(region)"
+    y = data.observations
+    print(c1+geom_bar(aes(x=x),y=y, stat="summary", fun_y=numpy.mean))
+    
+    #This code creates a scatterplot of observations and uses jitter to make the points
+    #     more readable
+    c2=ggplot(data,aes(x="region",y="observations"))
+    print(c2+geom_point()+coord_cartesian()+geom_jitter())
     return
 
 if __name__ == '__main__':
@@ -165,6 +156,6 @@ if __name__ == '__main__':
 
         i += 1
 
-        if i >= 3:
-            print("Maybe take a break for now.")
+        if i >= 8:
+            print("Maybe time to take a break.")
             break
