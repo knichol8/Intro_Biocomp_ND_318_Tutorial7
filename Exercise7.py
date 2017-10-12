@@ -127,22 +127,20 @@ import numpy
 import pandas
 from plotnine import *
 #read in .txt file and find size
-data=pandas.read_csv("data.txt", sep="\t", header=0)
+data=pandas.read_csv("data.txt", sep=',')
 data.shape
-#storing info
-######################################################regions=data["region"]
-observation=data["observations"]
+#This code creates a graph of means observations for each region.
+data.observations = data.observations.astype(float)
+d=ggplot(data)+theme_classic()+xlab("regions")+ylab("observation mean")
+d+geom_bar(aes(x="factor(region)"),y=data.observations, stat="summary", fun_y=numpy.mean)
 
-#barplot of means
-data.groupby(['region'])['observation'].mean()
-d=ggplot(observations)+theme_classic()+xlab("regions")+ylab("observation mean")
-d+geom_bar(aes(x="factor(region)"),y='observations', stat="summary", fun_y=numpy.mean)
 
-#Scatterplot
+#This code creates a scatterplot of observations and uses jitter to make the points
+#     more readable
 a=ggplot(data,aes('region', 'observations'))
 scatterplot=ggplot(data,aes(x="region",y="observations"))
-scatterplot+geom_point()+coord_cartesian()
-    
+scatterplot+geom_point()+coord_cartesian()+geom_jitter()
+
     return
 
 if __name__ == '__main__':
